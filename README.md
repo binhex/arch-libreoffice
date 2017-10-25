@@ -1,14 +1,14 @@
 **Application**
 
-[PyCharm](https://www.jetbrains.com/pycharm/)
+[LibreOffice Fresh](https://www.libreoffice.org/download/libreoffice-fresh/)
 
 **Description**
 
-PyCharm is an Integrated Development Environment (IDE) used in computer programming, specifically for the Python language. It is developed by the Czech company JetBrains.[2] It provides code analysis, a graphical debugger, an integrated unit tester, integration with version control systems (VCSes), and supports web development with Django.
+LibreOffice is a free and open source office suite, a project of The Document Foundation. It was forked from OpenOffice.org in 2010, which was an open-sourced version of the earlier StarOffice. The LibreOffice suite comprises programs for word processing, the creation and editing of spreadsheets, slideshows, diagrams and drawings, working with databases, and composing mathematical formulae. It is available in 110 languages.
 
 **Build notes**
 
-Latest stable PyCharm release from Arch Linux AUR.
+Latest stable LibreOffice Fresh release from Arch Linux AOR.
 
 **Usage**
 ```
@@ -22,7 +22,7 @@ docker run -d \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
-    binhex/arch-pycharm
+    binhex/arch-libreoffice
 ```
 
 Please replace all user variables in the above command defined by <> with the correct values.
@@ -32,14 +32,14 @@ Please replace all user variables in the above command defined by <> with the co
 docker run -d \
     -p 5900:5900 \
     -p 6080:6080 \
-    --name=pycharm \
-    -v /apps/docker/pycharm:/config \
-    -v /apps/docker/pycharm/projects:/data \
+    --name=libreoffice \
+    -v /apps/docker/libreoffice:/config \
+    -v /apps/docker/libreoffice/projects:/data \
     -v /etc/localtime:/etc/localtime:ro \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
-    binhex/arch-pycharm
+    binhex/arch-libreoffice
 ```
 
 **Access via web interface (noVNC)**
