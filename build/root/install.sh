@@ -48,8 +48,8 @@ source /root/aur.sh
 ####
 
 cat <<'EOF' > /tmp/startcmd_heredoc
-# run libreoffice
-libreoffice -env:UserInstallation=file:///config/libreoffice
+# run dbus as a session (terminates with app) for app libreoffice, used for this single auto start of libreoffice
+dbus-run-session -- libreoffice -env:UserInstallation=file:///config/libreoffice
 EOF
 
 # replace startcmd placeholder string with contents of file (here doc)
@@ -71,7 +71,7 @@ cp /home/nobody/favicon.ico /usr/share/novnc/
 cat <<'EOF' > /tmp/menu_heredoc
     <item label="LibreOffice Fresh">
     <action name="Execute">
-      <command>libreoffice</command>
+      <command>libreoffice -env:UserInstallation=file:///config/libreoffice</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
