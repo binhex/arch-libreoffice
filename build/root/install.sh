@@ -49,7 +49,7 @@ source /root/aur.sh
 
 cat <<'EOF' > /tmp/startcmd_heredoc
 # run libreoffice
-libreoffice
+libreoffice -env:UserInstallation=file:///config/libreoffice
 EOF
 
 # replace startcmd placeholder string with contents of file (here doc)
