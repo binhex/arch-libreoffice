@@ -19,7 +19,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
 ####
 
 # define pacman packages
-pacman_packages=""
+pacman_packages="jre8-openjdk-headless"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -49,7 +49,7 @@ source /root/aur.sh
 
 cat <<'EOF' > /tmp/startcmd_heredoc
 # run libreoffice
-/usr/bin/libreoffice
+libreoffice
 EOF
 
 # replace startcmd placeholder string with contents of file (here doc)
