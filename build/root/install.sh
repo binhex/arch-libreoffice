@@ -30,7 +30,7 @@ fi
 ####
 
 # define arch official repo (aor) packages
-aor_packages="icu libepubgen libqxp libstaroffice libfreehand libreoffice-fresh"
+aor_packages="libepubgen libqxp libstaroffice libfreehand libreoffice-fresh"
 
 # call aor script (arch official repo)
 source /root/aor.sh
