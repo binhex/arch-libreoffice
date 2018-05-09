@@ -19,7 +19,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
 ####
 
 # define pacman packages
-pacman_packages="jre8-openjdk-headless"
+pacman_packages="expect"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -30,7 +30,7 @@ fi
 ####
 
 # define arch official repo (aor) packages
-aor_packages="libepubgen libqxp libstaroffice libfreehand libreoffice-fresh"
+aor_packages=""
 
 # call aor script (arch official repo)
 source /root/aor.sh
@@ -43,6 +43,14 @@ aur_packages=""
 
 # call aur install script (arch user repo)
 source /root/aur.sh
+
+# run custom expect script to install aur libreoffice, expect
+# is required due to prompts during install.
+# the expect script uses /root/aur.sh to install libreoffice,
+# note that this package does not install libreoffice, it 
+# only builds the rpm package, so we then need to install via
+# pacman and finally delete the built package
+expect /root/libreoffice/init.exp && pacman -U /tmp/pkgbuild*/libreoffice-fresh-rpm/libreoffice-fresh-rpm* --noconfirm
 
 # config libreoffice
 ####
@@ -90,7 +98,7 @@ rm /tmp/menu_heredoc
 ####
 
 # define comma separated list of paths 
-install_paths="/tmp,/usr/share/themes,/home/nobody,/usr/share/novnc,/usr/include/libreoffice,/usr/lib/libreoffice,/usr/share/libreoffice,/usr/share/idl/libreoffice,/usr/share/applications/,/etc/xdg"
+install_paths="/tmp,/usr/share/themes,/home/nobody,/usr/share/novnc,/opt,/usr/share/applications/,/etc/xdg"
 
 # split comma separated string into list for install paths
 IFS=',' read -ra install_paths_list <<< "${install_paths}"

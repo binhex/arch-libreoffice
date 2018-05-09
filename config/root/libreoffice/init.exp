@@ -1,0 +1,13 @@
+#!/usr/bin/expect
+
+set timeout 300
+
+spawn /bin/bash -c "aur_packages=libreoffice-fresh-rpm && source /root/aur.sh"
+
+expect "Do you want to install additional langpack*"
+send "n\r"
+
+expect "Do you want to install additional helppack*"
+send "n\r"
+
+expect
