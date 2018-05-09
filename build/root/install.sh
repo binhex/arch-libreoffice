@@ -50,7 +50,7 @@ source /root/aur.sh
 # note that this package does not install libreoffice, it 
 # only builds the rpm package, so we then need to install via
 # pacman and finally delete the built package
-expect /root/libreoffice/init.exp && pacman -U /tmp/pkgbuild*/libreoffice-fresh-rpm/libreoffice-fresh-rpm* --noconfirm
+expect /root/libreoffice/init.exp && apacman -U /tmp/pkgbuild*/libreoffice-fresh-rpm/libreoffice-fresh-rpm* --noconfirm
 
 # config libreoffice
 ####

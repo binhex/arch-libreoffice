@@ -1,6 +1,6 @@
 #!/usr/bin/expect
 
-set timeout 300
+set timeout -1
 
 spawn /bin/bash -c "aur_packages=libreoffice-fresh-rpm && source /root/aur.sh"
 
