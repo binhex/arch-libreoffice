@@ -52,12 +52,15 @@ source /root/aur.sh
 # pacman and finally delete the built package
 expect /root/libreoffice/init.exp && apacman -U /tmp/pkgbuild*/libreoffice-fresh-rpm/libreoffice-fresh-rpm* --noconfirm
 
+# expand path for install, used for openbox as this cannot expand wildcards for path
+libreoffice_bin_path=/opt/libreoffice*/program/soffice
+
 # config libreoffice
 ####
 
 cat <<'EOF' > /tmp/startcmd_heredoc
-# run libreoffice
-/opt/libreoffice*/program/soffice
+# run libreoffice, note the -env flag is used to define the path to store libreoffice config
+/opt/libreoffice*/program/soffice -env:UserInstallation=file:///config/libreoffice
 EOF
 
 # replace startcmd placeholder string with contents of file (here doc)
@@ -76,10 +79,11 @@ cp /home/nobody/favicon.ico /usr/share/novnc/
 # config openbox
 ####
 
-cat <<'EOF' > /tmp/menu_heredoc
+# create file with contents of here doc, note EOF is NOT quoted to allow us to expand current variable 'libreoffice_bin_path'
+cat <<EOF > /tmp/menu_heredoc
     <item label="LibreOffice Fresh">
     <action name="Execute">
-      <command>/opt/libreoffice*/program/soffice</command>
+      <command>${libreoffice_bin_path} -env:UserInstallation=file:///config/libreoffice</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
