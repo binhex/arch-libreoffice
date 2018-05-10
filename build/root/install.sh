@@ -56,8 +56,8 @@ expect /root/libreoffice/init.exp && apacman -U /tmp/pkgbuild*/libreoffice-fresh
 ####
 
 cat <<'EOF' > /tmp/startcmd_heredoc
-# run dbus as a session (terminates with app) for app libreoffice, used for this single auto start of libreoffice
-dbus-run-session -- libreoffice -env:UserInstallation=file:///config/libreoffice
+# run libreoffice
+/opt/libreoffice*/program/soffice
 EOF
 
 # replace startcmd placeholder string with contents of file (here doc)
@@ -79,7 +79,7 @@ cp /home/nobody/favicon.ico /usr/share/novnc/
 cat <<'EOF' > /tmp/menu_heredoc
     <item label="LibreOffice Fresh">
     <action name="Execute">
-      <command>libreoffice -env:UserInstallation=file:///config/libreoffice</command>
+      <command>/opt/libreoffice*/program/soffice</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
