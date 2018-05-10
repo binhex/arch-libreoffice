@@ -53,7 +53,7 @@ source /root/aur.sh
 expect /root/libreoffice/init.exp && apacman -U /tmp/pkgbuild*/libreoffice-fresh-rpm/libreoffice-fresh-rpm* --noconfirm
 
 # expand path for install, used for openbox as this cannot expand wildcards for path
-libreoffice_bin_path=/opt/libreoffice*/program/soffice
+libreoffice_bin_path=$(cd /opt/libreoffice*/program && pwd)
 
 # config libreoffice
 ####
@@ -83,7 +83,7 @@ cp /home/nobody/favicon.ico /usr/share/novnc/
 cat <<EOF > /tmp/menu_heredoc
     <item label="LibreOffice Fresh">
     <action name="Execute">
-      <command>${libreoffice_bin_path} -env:UserInstallation=file:///config/libreoffice</command>
+      <command>${libreoffice_bin_path}/soffice -env:UserInstallation=file:///config/libreoffice</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
