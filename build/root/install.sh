@@ -19,7 +19,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
 ####
 
 # define pacman packages
-pacman_packages="expect"
+pacman_packages="jre8-openjdk-headless expect"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
