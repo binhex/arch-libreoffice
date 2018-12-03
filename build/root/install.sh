@@ -3,6 +3,13 @@
 # exit script if return code != 0
 set -e
 
+# resetting to live repo and using pacman for this app.
+echo 'Server = http://mirror.bytemark.co.uk/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+echo 'Server = http://archlinux.mirrors.uk2.net/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
+
+# sync package databases for pacman
+pacman -Syyu --noconfirm
+
 # build scripts
 ####
 
@@ -19,7 +26,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
 ####
 
 # define pacman packages
-pacman_packages="jre8-openjdk-headless expect"
+pacman_packages="jre8-openjdk-headless libepubgen libqxp libstaroffice libfreehand libreoffice-fresh"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -44,23 +51,12 @@ aur_packages=""
 # call aur install script (arch user repo)
 source /root/aur.sh
 
-# run custom expect script to install aur libreoffice, expect
-# is required due to prompts during install.
-# the expect script uses /root/aur.sh to install libreoffice,
-# note that this package does not install libreoffice, it 
-# only builds the rpm package, so we then need to install via
-# pacman and finally delete the built package
-expect /root/libreoffice/init.exp && apacman -U /tmp/pkgbuild*/libreoffice-fresh-rpm/libreoffice-fresh-rpm* --noconfirm
-
-# expand path for install, used for openbox as this cannot expand wildcards for path
-libreoffice_bin_path=$(cd /opt/libreoffice*/program && pwd)
-
 # config libreoffice
 ####
 
 cat <<'EOF' > /tmp/startcmd_heredoc
-# run libreoffice, note the -env flag is used to define the path to store libreoffice config
-/opt/libreoffice*/program/soffice -env:UserInstallation=file:///config/libreoffice
+# run dbus as a session (terminates with app) for app libreoffice, used for this single auto start of libreoffice
+dbus-run-session -- libreoffice -env:UserInstallation=file:///config/libreoffice
 EOF
 
 # replace startcmd placeholder string with contents of file (here doc)
@@ -79,11 +75,10 @@ cp /home/nobody/novnc-16x16.png /usr/share/novnc/app/images/icons/
 # config openbox
 ####
 
-# create file with contents of here doc, note EOF is NOT quoted to allow us to expand current variable 'libreoffice_bin_path'
-cat <<EOF > /tmp/menu_heredoc
+cat <<'EOF' > /tmp/menu_heredoc
     <item label="LibreOffice Fresh">
     <action name="Execute">
-      <command>${libreoffice_bin_path}/soffice -env:UserInstallation=file:///config/libreoffice</command>
+      <command>libreoffice -env:UserInstallation=file:///config/libreoffice</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
@@ -102,7 +97,7 @@ rm /tmp/menu_heredoc
 ####
 
 # define comma separated list of paths 
-install_paths="/tmp,/usr/share/themes,/home/nobody,/usr/share/novnc,/opt,/usr/share/applications/,/etc/xdg"
+install_paths="/tmp,/usr/share/themes,/home/nobody,/usr/share/novnc,/usr/include/libreoffice,/usr/lib/libreoffice,/usr/share/libreoffice,/usr/share/idl/libreoffice,/usr/share/applications/,/etc/xdg"
 
 # split comma separated string into list for install paths
 IFS=',' read -ra install_paths_list <<< "${install_paths}"
