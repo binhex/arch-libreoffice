@@ -57,7 +57,7 @@ rm /tmp/startcmd_heredoc
 ###
 
 # overwrite novnc 16x16 icon with application specific 16x16 icon (used by bookmarks and favorites)
-cp /home/nobody/novnc-16x16.png /usr/share/novnc/app/images/icons/
+cp /home/nobody/novnc-16x16.png /usr/share/webapps/novnc/app/images/icons/
 
 # config openbox
 ####
