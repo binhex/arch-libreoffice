@@ -84,7 +84,7 @@ rm /tmp/menu_heredoc
 ####
 
 # define comma separated list of paths 
-install_paths="/tmp,/usr/share/themes,/home/nobody,/usr/share/novnc,/usr/include/libreoffice,/usr/lib/libreoffice,/usr/share/libreoffice,/usr/share/idl/libreoffice,/usr/share/applications/,/etc/xdg"
+install_paths="/tmp,/usr/share/themes,/home/nobody,/usr/share/webapps/novnc,/usr/include/libreoffice,/usr/lib/libreoffice,/usr/share/libreoffice,/usr/share/idl/libreoffice,/usr/share/applications/,/etc/xdg"
 
 # split comma separated string into list for install paths
 IFS=',' read -ra install_paths_list <<< "${install_paths}"
