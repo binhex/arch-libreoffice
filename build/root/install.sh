@@ -29,11 +29,6 @@ if [[ ! -z "${pacman_packages}" ]]; then
 	pacman -S --needed $pacman_packages --noconfirm
 fi
 
-# python packages
-####
-
-pip install websockify PyXDG
-
 # aur packages
 ####
 
