@@ -34,6 +34,12 @@ fi
 # pacman packages
 ####
 
+# delme jan 2021
+# remove this package as its currently in conflict, i suspect this issue
+# will be resolved shortly but for now i am removing the conflicting package.
+pacman -Ru xorg-fonts-alias --noconfirm || true
+# /delme jan 2021
+
 # call pacman db and package updater script
 source upd.sh
 
