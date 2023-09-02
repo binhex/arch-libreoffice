@@ -38,13 +38,6 @@ fi
 # pacman packages
 ####
 
-# delme aug 2020
-# required to remove redundant package 'xorg-fonts-alias' which causes package
-# conflict with the newer package names of 'xorg-fonts-alias-xxx' during the
-# upgrade.
-pacman_confirm="yes"
-# /delme aug 2020
-
 # call pacman db and package updater script
 source upd.sh
 
