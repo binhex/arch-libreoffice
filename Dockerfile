@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.source = "https://github.com/binhex/arch-libreoff
 ADD build/root/*.sh /root/
 
 # get release tag name from build arg
-arg RELEASETAG
+ARG RELEASETAG
 
 # add pre-configured config files for libreoffice
 ADD config/nobody/ /home/nobody/
