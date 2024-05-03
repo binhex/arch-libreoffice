@@ -14,8 +14,8 @@ ARG TARGETARCH
 # add install and packer bash script
 ADD build/root/*.sh /root/
 
-# add pre-configured config files for libreoffice
-ADD config/nobody/ /home/nobody/
+# add pre-configured config
+ADD config/nobody/* /home/nobody/
 
 # add expect script for build of libreoffice
 ADD config/root/ /root/
